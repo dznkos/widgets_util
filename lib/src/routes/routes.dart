@@ -1,4 +1,5 @@
 
+import 'package:componentes/src/pages/input_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:componentes/src/pages/home_page.dart';
@@ -14,6 +15,7 @@ import 'package:componentes/src/pages/animated_container.dart';
         'alert' : (context) => AlertPage(),
         'avatar': (context) => AvatarPage(),
         'card'  : (context) => CardPage(),
-        'ani' : (context) => AnimatedContainderPage(),
+        'ani'   : (context) => AnimatedContainderPage(),
+        'input' : (context) => InputPage(),
     };
   }
