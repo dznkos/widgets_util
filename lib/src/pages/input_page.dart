@@ -11,6 +11,10 @@ class _InputPageState extends State<InputPage> {
   String _email ='';
   String _fecha = '';
 
+  String _opcionSeleccionada = 'Perú';
+
+  List<String> _poderes = ['Perú', 'Brasil','Puerto Rico','Rusia','EEUU','Argentina','Italia'];
+
   TextEditingController _inputFieldDateController = new TextEditingController();
 
   @override
@@ -29,6 +33,8 @@ class _InputPageState extends State<InputPage> {
           _crearPassword(),
           Divider(),
           _crearFecha(context),
+          Divider(),
+          _crearDropDown(),
           Divider(),
           _crearPersona(),
         ],
@@ -123,6 +129,39 @@ class _InputPageState extends State<InputPage> {
 
   }
 
+  List<DropdownMenuItem<String>> getOpcionesDropdown(){
+    List<DropdownMenuItem<String>> lista = new List();
+    _poderes.forEach((grado) {
+      lista.add( DropdownMenuItem(
+        child: Text(grado),
+        value: grado,
+      ));
+    });
+    return lista;
+}
+
+  Widget _crearDropDown() {
+    return Row(
+      children: [
+        Icon(Icons.select_all),
+        SizedBox(width: 35.0),
+        Expanded(
+          child: DropdownButton<String>(
+              value: _opcionSeleccionada,
+              items: getOpcionesDropdown(),
+              onChanged: (value) {
+                setState(() {
+                  _opcionSeleccionada = value;
+                });
+              },
+          ),
+        ),
+      ],
+    );
+
+  }
+
+
 
   Widget _crearPersona() {
     return ListTile(
@@ -132,23 +171,23 @@ class _InputPageState extends State<InputPage> {
   }
 
   _selectDate(BuildContext context) async{
-
     DateTime picked = await showDatePicker(
         context: context,
         initialDate: new DateTime.now(),
-        firstDate: new DateTime(2018),
-        lastDate: new DateTime(2020),
+        firstDate: new DateTime(2017),
+        lastDate: new DateTime(2021),
+        locale: Locale('es', 'ES')
     );
-
     if (picked != null){
       setState(() {
         _fecha = picked.toString();
         _inputFieldDateController.text = _fecha;
       });
-
     }
 
   }
+
+
 
 
 
